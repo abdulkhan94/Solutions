@@ -91,7 +91,20 @@ int addElement(int * array, int length)
 */
 int countNegative(int * array, int length)
 {
-    return 0;
+	//Variables
+	int i=0;
+	int c=0;
+	//Executable Statements
+	for(i=0; i<length; i++)
+	{
+	 if(array[i]<0)
+	{
+	 c++;
+	}
+	}
+	
+	return c;
+
 }
 /*
  * =================================================================
