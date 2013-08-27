@@ -50,11 +50,10 @@ int addElement(int * array, int length)
 	int i=0;
 	int sum=0;
 	//Executable Statements
-	printf("Enter values for array\n");
 	
 	for(i=0; i<length; i= i+1)
 	{
-	 scanf("%d", &array[i]);
+
 	 sum = sum+ array[i];
 	}
 
