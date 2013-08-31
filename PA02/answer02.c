@@ -55,7 +55,7 @@ int my_countchar(const char * s, char c)
 void my_strupper(char * s)
 {
 	//Variables
-	i = 0;
+	int i = 0;
 	
 	//Executions
 	for(i=0; s[i]!='\0', i++)
@@ -79,7 +79,16 @@ void my_strupper(char * s)
  */
 void my_strlower(char * s)
 {
-
+	//Variables
+	int i=0;
+	//Executables
+	for(i=0; s[i]!='\0'; i++)
+	{
+	 if((s[i]>=65) & (s[i]<=90))
+	 {
+	  s[i]= s[i] + DIFF;
+	 }
+	}
 }
 
 /**
