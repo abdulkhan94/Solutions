@@ -9,8 +9,8 @@
 int my_strlen(const char * s)
 {
 	//Variables
-	i=0;
-	length=0;
+	int i=0;
+	int length=0;
 	//Executions
 	for(i=0; s[i]!='\0';i++)
 	{
@@ -29,8 +29,8 @@ int my_strlen(const char * s)
 int my_countchar(const char * s, char c)
 {
 	//Variables
-	i=0;
-	count=0;
+	int i=0;
+	int count=0;
 	
 	//Executions
 	for(i=0; s[i]!='\0'; i++)
@@ -103,6 +103,13 @@ void my_strlower(char * s)
  */
 void my_strcpy(char * s1, const char * s2)
 {
+	//Variables
+	int i=0;
+	//Executables
+	for(i=0; s2[i]!='\0'; i++)
+	{
+	 s1[i] = s2[i];
+	}
 
 }
 
@@ -118,7 +125,14 @@ void my_strcpy(char * s1, const char * s2)
  */
 void my_strncpy(char * s1, const char * s2, int num)
 {
-    
+	//Variables
+	int i=0;
+	//Executables
+	for(i=0; i< num; i++)
+	{
+	 s2[i] = s1[i];
+	}
+ 
 }
 
 
@@ -133,7 +147,16 @@ void my_strncpy(char * s1, const char * s2, int num)
  */
 void my_strcat(char * s1, const char * s2) 
 {
-    
+	//Variables
+	
+	int i2=0;
+	int length=0;
+	//Executables
+	length = my_strlen(*s1)
+	for(i2=0; s2[i2]='\0';i2++)
+	{
+	 s1[i2+length] = s2[i2];
+	}
 }
 
 /** 
@@ -147,7 +170,17 @@ void my_strcat(char * s1, const char * s2)
  */
 void my_strncat(char * s1, const char * s2, int num)
 {
-   
+	//Variables
+	int i1=0;
+	int length=0;
+	
+	//Executables
+	length = my_strlen(*s1);
+	for(i1=0;i1<num ; i1++)
+	{
+	 s1[i1+length] = s2[i1];
+	}
+
 }
 
 /**
