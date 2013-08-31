@@ -195,7 +195,26 @@ void my_strncat(char * s1, const char * s2, int num)
 
 const char *my_strstr(const char * s1, const char * s2)
 {
-    return NULL;
+	//Variables
+	int i=0;
+	int t=0;
+	int length=0;
+	int count=0;
+	//Executables
+	length = my_strlen(*s1);
+	for(i=0;s1[i]='\0';i++)
+	{
+	 for(t=0;t< length; t++)
+	 {
+	  if(s1[t] == s2[t])
+	  {
+	  count++;
+	  }
+	 }
+	}
+
+
+	return NULL;
 }
 
 
