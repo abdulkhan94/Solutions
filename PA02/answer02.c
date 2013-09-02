@@ -10,14 +10,14 @@ int my_strlen(const char * s)
 {
 	//Variables
 	int i=0;
-	int length=0;
+	int l=0;
 	//Executions
 	for(i=0; s[i]!='\0';i++)
 	{
-	 length++;
+	 l++;
 	}    
 
-	return length;
+	return l;
 }
 
 /**
@@ -37,9 +37,9 @@ int my_countchar(const char * s, char c)
 	{
 	 if( (s[i]) == c)
 	 {
-	  count++
+	  count= count+1;
 	 }
-	
+	}
 	return count;
 }
 
@@ -58,7 +58,7 @@ void my_strupper(char * s)
 	int i = 0;
 	
 	//Executions
-	for(i=0; s[i]!='\0', i++)
+	for(i=0; s[i]!='\0'; i++)
 	{
 	 if((s[i]>=97) & (s[i]<=122))
 	 {
@@ -130,7 +130,7 @@ void my_strncpy(char * s1, const char * s2, int num)
 	//Executables
 	for(i=0; i< num; i++)
 	{
-	 s2[i] = s1[i];
+	 s1[i] = s2[i];
 	}
  
 }
@@ -152,8 +152,8 @@ void my_strcat(char * s1, const char * s2)
 	int i2=0;
 	int length=0;
 	//Executables
-	length = my_strlen(*s1)
-	for(i2=0; s2[i2]='\0';i2++)
+	length = my_strlen(s1);
+	for(i2=0; s2[i2]!='\0';i2++)
 	{
 	 s1[i2+length] = s2[i2];
 	}
@@ -175,7 +175,7 @@ void my_strncat(char * s1, const char * s2, int num)
 	int length=0;
 	
 	//Executables
-	length = my_strlen(*s1);
+	length = my_strlen(s1);
 	for(i1=0;i1<num ; i1++)
 	{
 	 s1[i1+length] = s2[i1];
@@ -196,23 +196,43 @@ void my_strncat(char * s1, const char * s2, int num)
 const char *my_strstr(const char * s1, const char * s2)
 {
 	//Variables
-	int i=0;
-	int t=0;
-	int length=0;
 	int count=0;
+	int l1=0;
+	int l2=0;
+	int i1=0;
+	int i2=0;
 	int check=0;
-	//Executables
-	length = my_strlen(*s1);
-	for(i=0;s1[i]='\0';i++)
+
+	//Executions
+	l1= my_strlen(s2);
+	l2= my_strlen(s1);
+		
+	for(i1= 0 ; s1[i1]!='\0' ; i1 = i1 + 1)
 	{
-	 for(t=0;t< length; t++)
+ 	 if(s1[i1] == s2[i2])
 	 {
-	  if(s1[t] == s2[t])
+	  i2=0;
+	  count= 0;
+	  check = i1;
+	  while (count < l1)
 	  {
-	  count++;
+	   if(s1[check] != s2[i2])
+	   {
+	    count= l1 +1;
+	   }
+	   else if(s1[check] == s2[i2])
+	   {
+	    count= count+1;
+	    i2= i2+1;
+    	   }
+	   check = check+1;
 	  }
 	 }
 	}
+	 
+	
+
+
 
 
 	return NULL;
@@ -256,29 +276,29 @@ void my_strinsert(char *s1, const char *s2, int pos)
 	int position=0; 
 	//Executions
 	position=pos;
-	l1= mystrlen(l1);
-	l2= mystrlen(l2);
+	l1= my_strlen(s1);
+	l2= my_strlen(s2);
 	
 	if(pos > l1)
 	{
 	 for(i1=l1; i1<(l1+l2) ; i1++)
 	 {
 	  s1[i1]= s2[i2];
-	  i2++	
+	  i2 = i2+1;
 	 }
 	}
 	
-	elseif(pos<l1)
+	else if( pos < l1)
 	{
 	 for(i1= position; i1<(l2+position); i1=i1+1)
 	 {
 	  s1[i1] = s2[i2];
-	  i2++;
+	  i2 = i2+1;
 	 }
 	 for(i1= l2 + pos; i1<(l2 + l1);i1++)
 	 {
 	  s1[i1] = s1[pos];
-	  pos++;
+	  pos = pos+1;
 	 }
 	}
 	
@@ -320,6 +340,34 @@ void my_strinsert(char *s1, const char *s2, int pos)
  */
 void my_strdelete(char *s, int pos, int length)
 {
+	//Variables
+	int i1=0;
+	int l1=0;
+
+	//Executions
+	l1= my_strlen(s);
+		
+	if(pos > l1)
+	{
+	for(i1 = length +pos; s[i1]!='\0'; i1++)
+	 {
+	  s[pos] = s[i1];
+	  pos= pos+1;
+	 }
+	}
+	
+	else if(pos<l1)
+	{
+	 if(length > l1)
+	 {
+	  s[pos]='\0';
+	 }
+	}
+
+
+
+
+
   
 }
 
