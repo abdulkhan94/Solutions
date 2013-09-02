@@ -200,6 +200,7 @@ const char *my_strstr(const char * s1, const char * s2)
 	int t=0;
 	int length=0;
 	int count=0;
+	int check=0;
 	//Executables
 	length = my_strlen(*s1);
 	for(i=0;s1[i]='\0';i++)
@@ -247,7 +248,41 @@ const char *my_strstr(const char * s1, const char * s2)
  */
 void my_strinsert(char *s1, const char *s2, int pos)
 {
-  
+	//Variables
+	int i1=0;
+	int i2=0;
+	int l1=0;
+	int l2=0;
+	int position=0; 
+	//Executions
+	position=pos;
+	l1= mystrlen(l1);
+	l2= mystrlen(l2);
+	
+	if(pos > l1)
+	{
+	 for(i1=l1; i1<(l1+l2) ; i1++)
+	 {
+	  s1[i1]= s2[i2];
+	  i2++	
+	 }
+	}
+	
+	elseif(pos<l1)
+	{
+	 for(i1= position; i1<(l2+position); i1=i1+1)
+	 {
+	  s1[i1] = s2[i2];
+	  i2++;
+	 }
+	 for(i1= l2 + pos; i1<(l2 + l1);i1++)
+	 {
+	  s1[i1] = s1[pos];
+	  pos++;
+	 }
+	}
+	
+	
 }
 
 /**
