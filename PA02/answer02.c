@@ -105,11 +105,15 @@ void my_strcpy(char * s1, const char * s2)
 {
 	//Variables
 	int i=0;
+	int i2=0;
 	//Executables
-	for(i=0; s2[i]!='\0'; i++)
+	
+	for(i=0; s2[i]!='\0'; i++, i2++)
 	{
-	 s1[i] = s2[i];
+	 s1[i] = s2[i2];
 	}
+        
+	s1[i] = '\0';	
 
 }
 
@@ -126,13 +130,15 @@ void my_strcpy(char * s1, const char * s2)
 void my_strncpy(char * s1, const char * s2, int num)
 {
 	//Variables
-	int i=0;
+	int i = 0;
+	int i2 = 0;
 	//Executables
-	for(i=0; i< num; i++)
+	for(i=0; i< num; i++,i2++)
 	{
 	 s1[i] = s2[i];
 	}
- 
+ 	
+	s1[i] = '\0';
 }
 
 
@@ -150,12 +156,14 @@ void my_strcat(char * s1, const char * s2)
 	//Variables
 	
 	int i2=0;
-	int length=0;
+	int l1=0;
+	int l2=0;
 	//Executables
-	length = my_strlen(s1);
+	l1 = my_strlen(s1);
+	l2 = my_strlen(s2);
 	for(i2=0; s2[i2]!='\0';i2++)
 	{
-	 s1[i2+length] = s2[i2];
+	 s1[i2+l1] = s2[i2];
 	}
 }
 
@@ -172,13 +180,15 @@ void my_strncat(char * s1, const char * s2, int num)
 {
 	//Variables
 	int i1=0;
-	int length=0;
-	
+	int l1=0;
+	int l2=0;
+
 	//Executables
-	length = my_strlen(s1);
+	l1 = my_strlen(s1);
+	l2 = my_strlen(s2);
 	for(i1=0;i1<num ; i1++)
 	{
-	 s1[i1+length] = s2[i1];
+	 s1[i1+l1] = s2[i1];
 	}
 
 }
@@ -201,40 +211,41 @@ const char *my_strstr(const char * s1, const char * s2)
 	int l2=0;
 	int i1=0;
 	int i2=0;
+	const char *pointer = NULL;
 	int check=0;
-
+	int temporary =0;
+	
+	
 	//Executions
 	l1= my_strlen(s2);
 	l2= my_strlen(s1);
 		
-	for(i1= 0 ; s1[i1]!='\0' ; i1 = i1 + 1)
+	for(i1=0 ; i1< l1; i1= i1+1)
 	{
- 	 if(s1[i1] == s2[i2])
+	 if(s1[i1] == s2[i2])
 	 {
+	  pointer = &s1[i1];
+	  temporary = i1;
+	  count=0;
 	  i2=0;
-	  count= 0;
-	  check = i1;
-	  while (count < l1)
+	  for(check = i1; check< ( l2 + temporary); check = check+1)
 	  {
-	   if(s1[check] != s2[i2])
+	   if(s1[check] == s2[i2])
 	   {
-	    count= l1 +1;
-	   }
-	   else if(s1[check] == s2[i2])
-	   {
-	    count= count+1;
 	    i2= i2+1;
-    	   }
-	   check = check+1;
+	    count = count +1;
+           }
+	   if( count == l2)
+	   {
+	    i1 = l1;
+	   }
 	  }
 	 }
 	}
-	 
-	
-
-
-
-
+	if(count == l2)
+        {
+         return pointer;
+        }
 	return NULL;
 }
 
@@ -363,11 +374,6 @@ void my_strdelete(char *s, int pos, int length)
 	  s[pos]='\0';
 	 }
 	}
-
-
-
-
-
   
 }
 
