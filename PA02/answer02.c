@@ -290,27 +290,26 @@ void my_strinsert(char *s1, const char *s2, int pos)
 	l1= my_strlen(s1);
 	l2= my_strlen(s2);
 	
-	if(pos > l1)
+	if((pos > l1) || (pos == l1))
 	{
-	 for(i1=l1; i1<(l1+l2) ; i1++)
-	 {
-	  s1[i1]= s2[i2];
-	  i2 = i2+1;
-	 }
+	 strcat(s1,s2);
 	}
 	
 	else if( pos < l1)
 	{
-	 for(i1= position; i1<(l2+position); i1=i1+1)
-	 {
-	  s1[i1] = s2[i2];
-	  i2 = i2+1;
-	 }
-	 for(i1= l2 + pos; i1<(l2 + l1);i1++)
-	 {
-	  s1[i1] = s1[pos];
-	  pos = pos+1;
-	 }
+	 
+	 for(i1= l1 + l2; i1>=(pos+l2);i1--)
+         {
+          s1[i1-1] = s1[i1-l2-1];
+         }
+
+	 for(i1= pos; i1<(l2+pos); i1=i1+1)
+         {
+          s1[i1] = s2[i2];
+          i2 = i2+1;
+         }
+
+	 s1[l2+l1] = '\0';
 	}
 	
 	
@@ -356,24 +355,33 @@ void my_strdelete(char *s, int pos, int length)
 	int l1=0;
 
 	//Executions
-	l1= my_strlen(s);
-		
-	if(pos > l1)
+	l1= strlen(s);
+	if( length > l1)
 	{
-	for(i1 = length +pos; s[i1]!='\0'; i1++)
+	 if (pos!= 0)
 	 {
-	  s[pos] = s[i1];
-	  pos= pos+1;
+	  s[pos] = '\0';
+  	 }  
+	 else if ( pos == 0)
+	 {
+	  s[pos] = '\0';
 	 }
+
 	}
 	
-	else if(pos<l1)
+	else if ( length < l1)
 	{
-	 if(length > l1)
+	 for(i1 = length+pos; i1<l1; i1= i1+1)
 	 {
-	  s[pos]='\0';
+	  s[ pos ] = s[i1];
+	  pos = pos +1;
 	 }
+	
+	 s[l1-length] = '\0';
 	}
-  
+
+
 }
+
+
 
