@@ -108,9 +108,11 @@ void my_strcpy(char * s1, const char * s2)
 	int i2=0;
 	//Executables
 	
-	for(i=0; s2[i]!='\0'; i++, i2++)
+	while( s2[i]!='\0')
 	{
 	 s1[i] = s2[i2];
+	 i++;
+	 i2++;
 	}
         
 	s1[i] = '\0';	
@@ -356,19 +358,30 @@ void my_strdelete(char *s, int pos, int length)
 
 	//Executions
 	l1= strlen(s);
+
+
 	if( length > l1)
 	{
+
+
 	 if (pos!= 0)
 	 {
+
+
 	  s[pos] = '\0';
   	 }  
+
+
 	 else if ( pos == 0)
 	 {
+
+
 	  s[pos] = '\0';
 	 }
-
 	}
 	
+
+
 	else if ( length < l1)
 	{
 	 
@@ -378,8 +391,10 @@ void my_strdelete(char *s, int pos, int length)
 	  
 	  s[ pos ] = s[i1];
 	  pos = pos +1;
+
 	  i1++;
 	 }
+
 	 s[l1-length] = '\0';
 	}
 
