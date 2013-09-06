@@ -371,12 +371,15 @@ void my_strdelete(char *s, int pos, int length)
 	
 	else if ( length < l1)
 	{
-	 for(i1 = length+pos; i1<l1; i1= i1+1)
-	 {
+	 
+	 i1 = length + pos;
+	 while(i1 < l1)
+	 {	
+	  
 	  s[ pos ] = s[i1];
 	  pos = pos +1;
+	  i1++;
 	 }
-	
 	 s[l1-length] = '\0';
 	}
 
