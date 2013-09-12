@@ -73,7 +73,6 @@ int * readIntegers(const char * filename, int * numberOfIntegers)
 	doc = fopen(filename, "r");
 	if ( doc != NULL )
 	{
-	 //while( fscanf(doc,"%d" , &rep) != EOF )
 	 for ( counter = 0; fscanf(doc, "%d", &rep)!= EOF ; counter++ )
 	 {
 	  i++;
@@ -85,6 +84,12 @@ int * readIntegers(const char * filename, int * numberOfIntegers)
 	 fseek(doc , 0 ,SEEK_SET);
 	 
 	 i = 0;
+	 for( i = 0; i < *numberOfIntegers ; i = i +1)
+	 {
+	  fscanf( doc, "%d", &array[i]) ; 
+	 }
+	 
+	}
 
 	return NULL;
 }	
