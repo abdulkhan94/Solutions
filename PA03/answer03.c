@@ -88,10 +88,10 @@ int * readIntegers(const char * filename, int * numberOfIntegers)
 	 {
 	  fscanf( doc, "%d", &array[i]) ; 
 	 }
-	 
+	fclose(doc); 
 	}
 
-	return NULL;
+	return array;
 }	
 
 /**
