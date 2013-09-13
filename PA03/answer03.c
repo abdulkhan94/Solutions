@@ -81,7 +81,7 @@ int * readIntegers(const char * filename, int * numberOfIntegers)
 	 {
 	  i++;
 	 }
-	
+	 //3
 	 *numberOfIntegers = counter;
 	 array = malloc( sizeof (int)*(*numberOfIntegers));
 
@@ -200,25 +200,26 @@ void QuickSort(int *arr, int d1, int d2)
 	int j = d2;
 	int pivot = arr[d1];
 	int a = 0;
+	int b = 0;
 
 	
 	//Executable Statements
 	while( d1 < d2 )
 	{
 
-         for(d2 = j; (arr[d2] > pivot) && (d1<d2) ; d2 = d2-1)
+         for(a=0; (arr[d2] > pivot) && (d1<d2) ;a= a+1)
          {
-          a = a+1;
+	   d2= d2-1;
          }
          arr[d1] = arr[d2];
          a = 0;
 
-	 for( d1 = i; (d1 < d2) && (arr[d1] < pivot) ; d1++)
+	 for( b=0; (d1 < d2) && (arr[d1] < pivot) ;b++)
          {
-          a = a+1;
+	   d1++;
          }
          arr[d2] = arr[d1];
-         a = 0;
+         b = 0;
 	}
 	
 	arr[d1] = pivot;
@@ -245,6 +246,11 @@ int HelpSearcher(int* arr, int d1, int d2, int key)
 	//Executions
 	cent = (d1 + d2)/2;
 	
+	if(d1>d2)
+	{
+	 return -1;
+	}
+
 	if(arr[cent] > key)
 	{
 	 return HelpSearcher(arr, d1, (cent-1), key);
@@ -254,10 +260,11 @@ int HelpSearcher(int* arr, int d1, int d2, int key)
 	{
 	 return cent;
 	}
-
-	if(arr[ cent] < key)
+	
+	if( arr[cent] < key )
 	{
-	 return HelpSearcher(arr, (cent-1), d2, key);
+	 return HelpSearcher(arr, (cent+1), d2, key);
 	}
-
+		
+	return -1;
 }
