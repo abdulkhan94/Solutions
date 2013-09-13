@@ -77,11 +77,11 @@ int * readIntegers(const char * filename, int * numberOfIntegers)
 	doc = fopen(filename, "r");
 	if ( doc != NULL )
 	{
-	 for ( counter = 0; fscanf(doc, "%d", &rep)!= EOF ; counter++ )
+	 for ( i = 0; fscanf(doc, "%d", &rep)!= EOF ; i++ )
 	 {
-	  i++;
+	   counter++;
 	 }
-	 //3
+	 
 	 *numberOfIntegers = counter;
 	 array = malloc( sizeof (int)*(*numberOfIntegers));
 
