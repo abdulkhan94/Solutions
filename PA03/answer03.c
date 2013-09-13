@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 void QuickSort(int* , int , int);
-
+int HelpSearcher(int*, int, int ,int);
 
 
 /**
@@ -231,6 +231,33 @@ void QuickSort(int *arr, int d1, int d2)
 	if( i < d1 )
 	{
 	 QuickSort(arr , i , d1 - 1);
+	}
+
+}
+
+
+
+int HelpSearcher(int* arr, int d1, int d2, int key)
+{
+	//Variables
+	int cent = 0;
+	
+	//Executions
+	cent = (d1 + d2)/2;
+	
+	if(arr[cent] > key)
+	{
+	 return HelpSearcher(arr, d1, (cent-1), key);
+	}
+	
+	if(arr[cent] == key)
+	{
+	 return cent;
+	}
+
+	if(arr[ cent] < key)
+	{
+	 return HelpSearcher(arr, (cent-1), d2, key);
 	}
 
 }
