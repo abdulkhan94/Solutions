@@ -133,8 +133,9 @@ int * readIntegers(const char * filename, int * numberOfIntegers)
  */
 void sort(int * arr, int length)
 {
-    
+	QuickSort(arr, 0, length-1);    
 }
+
 
 /**
  * Use binary search to find 'key' in a sorted array of integers
@@ -186,3 +187,32 @@ int search(int * arr, int length, int key)
 }
 
 
+
+
+void QuickSort(int *arr, int d1, int d2)
+{
+	//Variable Declarations
+	int i = d1;
+	int j = d2;
+	int pivot = arr[d1];
+	int a = 0;
+
+	
+	//Executable Statements
+	while( d1 > d2 )
+	{
+	 for(d2 = d2; (arr[d1] > pivot) && (d1<d2) ; d2 = d2-1)
+	 {
+	  	a = a+1;
+	 }
+	arr[d1] = arr[d2];
+	a = 0;
+	
+
+
+
+
+
+
+
+}
