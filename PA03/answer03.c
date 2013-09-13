@@ -2,7 +2,10 @@
 #include "pa03.h"
 #include <stdio.h>
 #include <stdlib.h>
+
 void QuickSort(int* , int , int);
+
+
 
 /**
  * Read a file of integers.
@@ -184,7 +187,7 @@ void sort(int * arr, int length)
  */
 int search(int * arr, int length, int key)
 {
-    return -1;
+    return HelpSearcher(arr , 0, length, key);
 }
 
 
@@ -200,21 +203,22 @@ void QuickSort(int *arr, int d1, int d2)
 
 	
 	//Executable Statements
-	while( d1 > d2 )
+	while( d1 < d2 )
 	{
-	 for(d2 = d2; (arr[d1] > pivot) && (d1<d2) ; d2 = d2-1)
-	 {
-	  a = a+1;
-	 }
-	 arr[d1] = arr[d2];
-	 a = 0;
-         
-	 for( d1 = d1; (d1 < d2) && (arr[d1] < pivot) ; d1++)
-	 {
-	  a = a+1;	
-	 }
-	 arr[d2] = arr[d1];
-	 a = 0;
+
+         for(d2 = j; (arr[d2] > pivot) && (d1<d2) ; d2 = d2-1)
+         {
+          a = a+1;
+         }
+         arr[d1] = arr[d2];
+         a = 0;
+
+	 for( d1 = i; (d1 < d2) && (arr[d1] < pivot) ; d1++)
+         {
+          a = a+1;
+         }
+         arr[d2] = arr[d1];
+         a = 0;
 	}
 	
 	arr[d1] = pivot;
