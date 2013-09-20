@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+void parting(int, int*, int);
 
 /*
  * =================================================================
@@ -36,9 +36,10 @@ void partitionAll(int value)
   printf("partitionAll %d\n", value);
   //Local Variables
   int i=0;
-  int* array = malloc(sizeof(int)*value
+  int* array = malloc(sizeof(int)*value);
   
   //Executable Statements
+  i++;
   free(array);
   parting(value,array,0);
 
@@ -66,6 +67,13 @@ void partitionAll(int value)
 void partitionIncreasing(int value)
 {
   printf("partitionIncreasing %d\n", value);
+  //Variables
+  int *buff;
+
+  buff = malloc(sizeof(int) * value);
+  
+  free(buff);
+  
 
 }
 
@@ -213,12 +221,12 @@ void parting(int a, int* array, int counter)
     }
   else if( a == 0 )
     {
-      printf(" = ");
+      printf("= ");
       for( i = 0; i < counter - 1; i = i+1)
 	{
-	  printf("%d +", array[i]);
+	  printf("%d + ", array[i]);
 	}
-      printf("%d\n",array[counter]);
+      printf("%d\n",array[counter-1]);
     }
 
 }
