@@ -17,7 +17,8 @@
 #include <stdlib.h>
 
 void parting(int, int*, int);
-
+void increasing(*int, int, int);
+void print(int*, int);
 /*
  * =================================================================
  * This function prints all partitions of a positive integer value
@@ -69,12 +70,11 @@ void partitionIncreasing(int value)
   printf("partitionIncreasing %d\n", value);
   //Variables
   int *buff;
-
+  //Executions
   buff = malloc(sizeof(int) * value);
-  
+  increasing(buff, 0 ,value);
   free(buff);
   
-
 }
 
 /*
@@ -229,4 +229,45 @@ void parting(int a, int* array, int counter)
       printf("%d\n",array[counter-1]);
     }
 
+}
+
+void increasing(int *array, int position, int count)
+{
+  //Variables
+  int i = 0;
+  int a = 0;
+  //Executions
+  if( i >= 0 )
+    {
+      a = a+1
+    }
+  else if( i <= 0)
+    {
+      print(array, position);
+      return;
+    }
+  
+  for( count = 1; count <= i; count = count+1)
+    {
+      if((position == 0) || (count > array[position-1]))
+	{
+	  array[position] = count;
+	  increasing(array, position , i-count);
+	}
+    }
+
+}
+
+void print(int *array, int last)
+{
+  //Local Variables
+  int i = 0;
+  
+  //Executions
+  printf("= ");
+  for( i =0; i < last-1; i = i+1)
+    {
+      printf("%d + ", array[i]);
+    }
+  printf("%d\n",array[last - 1]);
 }
