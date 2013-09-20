@@ -211,4 +211,14 @@ void parting(int a, int* array, int counter)
 	  parting( a - value, array, counter+1);
 	}
     }
+  else if( a == 0 )
+    {
+      printf(" = ");
+      for( i = 0; i < counter - 1; i = i+1)
+	{
+	  printf("%d +", array[i]);
+	}
+      printf("%d\n",array[counter]);
+    }
+
 }
