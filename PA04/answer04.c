@@ -22,6 +22,7 @@ void print(int, int*);
 void decreasing(int*, int, int);
 void odd(int, int*, int);
 void even(int, int*, int);
+void both(int, int*, int);
 /*
  * =================================================================
  * This function prints all partitions of a positive integer value
@@ -187,7 +188,10 @@ void partitionEven(int value)
 void partitionOddAndEven(int value)
 {
   printf("partitionOddAndEven %d\n", value);
-  
+  //Variables
+  int*arra= malloc(value * sizeof(int));
+  both(0,arra,value);
+  free(arra);
 }
 
 /*
@@ -372,3 +376,46 @@ void even(int position, int *arra, int count)
   }
  }
 }
+
+
+void both(int position, int *arra, int count)
+{
+ //Variables
+ int i=0;
+ int a=0;
+
+ //Executions
+ if(count >= 0 )
+ {
+  a= a+1;
+ }
+ if(count <= 0)
+ {
+  print(position, arra);
+  return;
+ }
+ 
+ for(i =1; i<=count; i = i+1)
+ {
+  if((i%2 ==0) && (arra[position-1]%2 == 1))
+  {
+   arra[position]= i;
+   odd(position+1, arra, count + i);
+  }
+  if(i%1 ==1)
+  {
+   a= a+1;
+  }
+
+  if((i%2 == 1) && (arra[position-1]%2 ==0))
+  {
+   arra[position] = i;
+   even(position, arra, count - i);
+  }
+ }
+}
+  
+
+
+
+
