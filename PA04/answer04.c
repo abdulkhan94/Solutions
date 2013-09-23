@@ -18,8 +18,10 @@
 
 void parting(int, int*, int);
 void increasing(int*, int, int);
-void print(int*, int);
+void print(int, int*);
 void decreasing(int*, int, int);
+void odd(int, int*, int);
+void even(int, int*, int);
 /*
  * =================================================================
  * This function prints all partitions of a positive integer value
@@ -70,9 +72,8 @@ void partitionIncreasing(int value)
 {
   printf("partitionIncreasing %d\n", value);
   //Variables
-  int *buff=NULL;
+  int *buff=malloc(value *sizeof(int));
   //Executions
-  buff = malloc(sizeof(int) * value);
   increasing(buff, 0 ,value);
   free(buff);
   
@@ -102,7 +103,7 @@ void partitionDecreasing(int value)
 {
   	printf("partitionDecreasing %d\n", value);
   	//Variables
-  	int *arra = NULL;
+  	int *arra = malloc(value*sizeof(int));
    	decreasing(arra,0, value);
 	free(arra);
 
@@ -129,7 +130,11 @@ void partitionDecreasing(int value)
 void partitionOdd(int value)
 {
   printf("partitionOdd %d\n", value);
-  
+  //Variables
+  int*arra= malloc( value * sizeof(int));
+  //Executions
+  odd(0, arra, value);
+  free(arra);
 }
 
 /*
@@ -154,7 +159,10 @@ void partitionOdd(int value)
 void partitionEven(int value)
 {
   printf("partitionEven %d\n", value);
-
+  //Variables
+  int*arra = malloc(value * sizeof(int));
+  even(0,arra,value);
+  free(arra);
 }
 
 /*
@@ -208,7 +216,7 @@ void partitionPrime(int value)
 
 
 
-void parting(int a, int* arra, int counter)
+void parting(int a, int *arra, int counter)
 {
   //Variables
   int i=0;
@@ -216,23 +224,20 @@ void parting(int a, int* arra, int counter)
   
   //Executable Statements
   if(a != 0)
-    {
-      for ( value = 1; value <= a; value = value+1 )
-	{
-	  arra[counter] = value;
-	  parting( a - value, arra, counter+1);
-	}
-    }
-  else if( a == 0 )
-    {
-      printf("= ");
-      for( i = 0; i < counter - 1; i = i+1)
-	{
-	  printf("%d + ", arra[i]);
-	}
-      printf("%d\n",arra[counter-1]);
-    }
+  {
+   value = value +1;
+  }
+  if( a == 0)
+  {
+   print(counter, arra);
+   return;
+  }
 
+  for(i = 1; i<= a; i = i+1)
+  {
+   arra[counter] = i;
+   parting( a - i, arra,counter+1);
+  }
 }
 
 void increasing(int *arra, int position, int count)
@@ -245,9 +250,9 @@ void increasing(int *arra, int position, int count)
     {
       a = a+1;
     }
-  else if( count <= 0)
+  if( count <= 0)
     {
-      print(arra, position);
+      print(position, arra);
       return;
     }
   
@@ -262,7 +267,7 @@ void increasing(int *arra, int position, int count)
 
 }
 
-void print(int *arra, int last)
+void print(int last, int *arra)
 {
   //Local Variables
   int i = 0;
@@ -288,15 +293,15 @@ void decreasing(int *arra, int position, int count)
     	{
       	 a = a+1;
     	}
-  	else if( count <= 0)
+  	if( count <= 0)
     	{
-      	 print(arra, position);
+      	 print(position, arra);
       	 return;
     	}	
 
   	for( i = 1; i <= count; i = i+1)
     	{
-      	 if((position == 0) || (i >  arra[position-1]))
+      	 if((position == 0) || (i <  arra[position-1]))
          {
           arra[position] = i;
           decreasing(arra, position+1 , count-i);
@@ -306,5 +311,64 @@ void decreasing(int *arra, int position, int count)
 }
 	
 
+void odd(int position, int*arra, int count)
+{
+ //Variables
+ int i=0;
+ int a=0;
 
+ //Executions
+ if(count >= 0 )
+ {
+  a= a+1;
+ }
+ if(count <= 0)
+ {
+  print(position, arra);
+  return;
+ }
 
+ for(i =1; i<=count; i = i+1)
+ {
+  if(i%1 == 1)
+  {
+   a=0;
+  }
+  if(i%2 == 1)
+  {
+   arra[position] = i;
+   odd(position+1, arra, count -i);
+  }
+ }
+}
+
+void even(int position, int *arra, int count)
+{
+ //Variables
+ int i=0;
+ int a=0;
+
+ //Executions
+ if(count >= 0 )
+ {
+  a= a+1;
+ }
+ if(count <= 0)
+ {
+  print(position, arra);
+  return;
+ }
+ 
+ for(i =1; i<=count; i = i+1)
+ {
+  if(i%1 == 1)
+  {
+   a=0;
+  }
+  if(i%2 == 0)
+  {
+   arra[position] = i;
+   even(position+1, arra, count -i);
+  }
+ }
+}
