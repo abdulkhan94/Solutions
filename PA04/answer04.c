@@ -23,6 +23,7 @@ void decreasing(int*, int, int);
 void odd(int, int*, int);
 void even(int, int*, int);
 void both(int, int*, int);
+void prime(int, int*, int);
 /*
  * =================================================================
  * This function prints all partitions of a positive integer value
@@ -215,6 +216,11 @@ void partitionOddAndEven(int value)
 void partitionPrime(int value)
 {
   printf("partitionPrime %d\n", value);
+  //Variables
+  int *arra= malloc(value*sizeof(int));
+  //Executions
+  prime(0, arra, value);
+  free(arra);
 
 }
 
@@ -247,7 +253,7 @@ void parting(int a, int *arra, int counter)
 void increasing(int *arra, int position, int count)
 {
   //Variables
-  int i = 0;
+  int i = 1;
   int a = 0;
   //Executions
   if( count >= 0 )
@@ -260,13 +266,14 @@ void increasing(int *arra, int position, int count)
       return;
     }
   
-  for( i = 1; i <= count; i = i+1)
+  while(i <= count)
     {
       if((position == 0) || (i > arra[position-1]))
 	{
 	  arra[position] = i;
 	  increasing(arra, position+1 , count-i);
 	}
+      i=i+1;
     }
 
 }
@@ -288,7 +295,7 @@ void print(int last, int *arra)
 void decreasing(int *arra, int position, int count)
 {
 	//Variables
-	int i = 0;
+	int i = 1;
 	int a=0;
 	
 
@@ -303,13 +310,14 @@ void decreasing(int *arra, int position, int count)
       	 return;
     	}	
 
-  	for( i = 1; i <= count; i = i+1)
+  	while(i <= count)
     	{
       	 if((position == 0) || (i <  arra[position-1]))
          {
           arra[position] = i;
           decreasing(arra, position+1 , count-i);
          }
+	i=i+1;
         } 
 
 }
@@ -318,7 +326,7 @@ void decreasing(int *arra, int position, int count)
 void odd(int position, int*arra, int count)
 {
  //Variables
- int i=0;
+ int i=1;
  int a=0;
 
  //Executions
@@ -332,7 +340,7 @@ void odd(int position, int*arra, int count)
   return;
  }
 
- for(i =1; i<=count; i = i+1)
+ while(i<=count)
  {
   if(i%1 == 1)
   {
@@ -343,13 +351,14 @@ void odd(int position, int*arra, int count)
    arra[position] = i;
    odd(position+1, arra, count -i);
   }
+ i=i+1;
  }
 }
 
 void even(int position, int *arra, int count)
 {
  //Variables
- int i=0;
+ int i=1;
  int a=0;
 
  //Executions
@@ -363,7 +372,7 @@ void even(int position, int *arra, int count)
   return;
  }
  
- for(i =1; i<=count; i = i+1)
+ while(i<=count)
  {
   if(i%1 == 1)
   {
@@ -374,6 +383,7 @@ void even(int position, int *arra, int count)
    arra[position] = i;
    even(position+1, arra, count -i);
   }
+ i = i+1;
  }
 }
 
@@ -381,7 +391,7 @@ void even(int position, int *arra, int count)
 void both(int position, int *arra, int count)
 {
  //Variables
- int i=0;
+ int i=1;
  int a=0;
 
  //Executions
@@ -395,27 +405,64 @@ void both(int position, int *arra, int count)
   return;
  }
  
- for(i =1; i<=count; i = i+1)
+ while(i<= count)
  {
-  if((i%2 ==0) && (arra[position-1]%2 == 1))
+  if((i%2 ==0 && arra[position-1]%2 == 1))
   {
    arra[position]= i;
-   odd(position+1, arra, count + i);
-  }
-  if(i%1 ==1)
-  {
-   a= a+1;
+   odd(position+1, arra, count - i);
   }
 
-  if((i%2 == 1) && (arra[position-1]%2 ==0))
+  if((i%2 == 1 && arra[position-1]%2 ==0))
   {
    arra[position] = i;
-   even(position, arra, count - i);
+   even(position+1, arra, count - i);
   }
+ i = i+1;
  }
 }
   
+void prime(int position, int *arra, int count)
+{
+ //Variables
+ int i=1;
+ int a=0;
+ int j=2;
+ int l=0;
+ //Executions
+ if(count >= 0 )
+ {
+  l= l+1;
+ }
+ if(count <= 0)
+ {
+  print(position, arra);
+  return;
+ } 
+ while(i <= count)
+ {
+  
+  if( i >2)
+  {
+   while(j<i)
+   {
+    if( i% j==0)
+    {
+     a= a+1;
+    }
+   j++;
+   }
+  }
+  if((i>1) &(a==0))
+  {
+   arra[position] = i;
+   prime(position+1, arra,count - i);
+  }
+ i++;
+ }
+}
+ 
 
-
+ 
 
 
