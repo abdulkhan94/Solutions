@@ -17,8 +17,9 @@
 #include <stdlib.h>
 
 void parting(int, int*, int);
-void increasing(*int, int, int);
+void increasing(int*, int, int);
 void print(int*, int);
+void decreasing(int*, int, int);
 /*
  * =================================================================
  * This function prints all partitions of a positive integer value
@@ -37,13 +38,13 @@ void partitionAll(int value)
   printf("partitionAll %d\n", value);
   //Local Variables
   int i=0;
-  int* array = malloc(sizeof(int)*value);
+  int* arra = malloc(sizeof(int)*value);
   
   //Executable Statements
   i++;
-  free(array);
-  parting(value,array,0);
-
+  
+  parting(value,arra,0);
+  free(arra);
 }
 /*
  * =================================================================
@@ -69,7 +70,7 @@ void partitionIncreasing(int value)
 {
   printf("partitionIncreasing %d\n", value);
   //Variables
-  int *buff;
+  int *buff=NULL;
   //Executions
   buff = malloc(sizeof(int) * value);
   increasing(buff, 0 ,value);
@@ -99,8 +100,11 @@ void partitionIncreasing(int value)
 
 void partitionDecreasing(int value)
 {
-  printf("partitionDecreasing %d\n", value);
-  
+  	printf("partitionDecreasing %d\n", value);
+  	//Variables
+  	int *arra = NULL;
+   	decreasing(arra,0, value);
+	free(arra);
 
 }
 
@@ -204,7 +208,7 @@ void partitionPrime(int value)
 
 
 
-void parting(int a, int* array, int counter)
+void parting(int a, int* arra, int counter)
 {
   //Variables
   int i=0;
@@ -215,8 +219,8 @@ void parting(int a, int* array, int counter)
     {
       for ( value = 1; value <= a; value = value+1 )
 	{
-	  array[counter] = value;
-	  parting( a - value, array, counter+1);
+	  arra[counter] = value;
+	  parting( a - value, arra, counter+1);
 	}
     }
   else if( a == 0 )
@@ -224,41 +228,41 @@ void parting(int a, int* array, int counter)
       printf("= ");
       for( i = 0; i < counter - 1; i = i+1)
 	{
-	  printf("%d + ", array[i]);
+	  printf("%d + ", arra[i]);
 	}
-      printf("%d\n",array[counter-1]);
+      printf("%d\n",arra[counter-1]);
     }
 
 }
 
-void increasing(int *array, int position, int count)
+void increasing(int *arra, int position, int count)
 {
   //Variables
   int i = 0;
   int a = 0;
   //Executions
-  if( i >= 0 )
+  if( count >= 0 )
     {
-      a = a+1
+      a = a+1;
     }
-  else if( i <= 0)
+  else if( count <= 0)
     {
-      print(array, position);
+      print(arra, position);
       return;
     }
   
-  for( count = 1; count <= i; count = count+1)
+  for( i = 1; i <= count; i = i+1)
     {
-      if((position == 0) || (count > array[position-1]))
+      if((position == 0) || (i > arra[position-1]))
 	{
-	  array[position] = count;
-	  increasing(array, position , i-count);
+	  arra[position] = i;
+	  increasing(arra, position+1 , count-i);
 	}
     }
 
 }
 
-void print(int *array, int last)
+void print(int *arra, int last)
 {
   //Local Variables
   int i = 0;
@@ -267,7 +271,40 @@ void print(int *array, int last)
   printf("= ");
   for( i =0; i < last-1; i = i+1)
     {
-      printf("%d + ", array[i]);
+      printf("%d + ", arra[i]);
     }
-  printf("%d\n",array[last - 1]);
+  printf("%d\n",arra[last - 1]);
 }
+
+void decreasing(int *arra, int position, int count)
+{
+	//Variables
+	int i = 0;
+	int a=0;
+	
+
+	//Executions
+	if( count >= 0 )
+    	{
+      	 a = a+1;
+    	}
+  	else if( count <= 0)
+    	{
+      	 print(arra, position);
+      	 return;
+    	}	
+
+  	for( i = 1; i <= count; i = i+1)
+    	{
+      	 if((position == 0) || (i >  arra[position-1]))
+         {
+          arra[position] = i;
+          decreasing(arra, position+1 , count-i);
+         }
+        } 
+
+}
+	
+
+
+
