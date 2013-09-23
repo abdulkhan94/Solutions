@@ -410,15 +410,16 @@ void both(int position, int *arra, int count)
   if((i%2 ==0 && arra[position-1]%2 == 1))
   {
    arra[position]= i;
-   odd(position+1, arra, count - i);
+   both(position+1, arra, count - i);
   }
 
   if((i%2 == 1 && arra[position-1]%2 ==0))
   {
    arra[position] = i;
-   even(position+1, arra, count - i);
+   both(position+1, arra, count - i);
   }
- i = i+1;
+
+  i = i+1;
  }
 }
   
@@ -434,35 +435,34 @@ void prime(int position, int *arra, int count)
  {
   l= l+1;
  }
+ 
  if(count <= 0)
  {
   print(position, arra);
   return;
  } 
- while(i <= count)
+ 
+
+while(i <= count)
  {
   
-  if( i >2)
+  if( i > 2)
   {
+   j=2; 
    while(j<i)
    {
-    if( i% j==0)
-    {
-     a= a+1;
-    }
-   j++;
+     if( i% j==0)
+       {
+         a= a+1;
+       }
+    j++;
    }
-  }
-  if((i>1) &(a==0))
-  {
+  }//end of if
+  if((a==0) & (i > 1 ))
+   {
    arra[position] = i;
    prime(position+1, arra,count - i);
-  }
- i++;
+   }
+  i++;
  }
 }
- 
-
- 
-
-
