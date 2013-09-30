@@ -78,12 +78,14 @@ int * readInteger(char * filename, int * numInteger)
  	  count = count +1;
 	 }
 	*numInteger = count;
+
 	arra = malloc(sizeof(int)*(*numInteger));
-	
+
+	fseek(f,0,SEEK_SET);
 	while( i < *numInteger )
 	{
 	 fscanf(f,"%d",&arra[i]);
-	 
+	 i = i+1;
 	}
 	fclose(f);
 	}
@@ -158,7 +160,34 @@ int * readInteger(char * filename, int * numInteger)
 
 char * * readString(char * filename, int * numString)
 {
-    return NULL;
+	FILE *f= NULL;
+	char buf[MAXIMUM_LENGTH];
+	char **sent= NULL;
+	int i=0;
+	int count=0;
+
+	//Executions
+	f= fopen(filename,"r");
+	
+	if(f != NULL)
+	{
+ 	 while(fgets(buf, MAXIMUM_LENGTH, f) != NULL)
+	 {
+	  count = count+1;
+	 }
+	
+	*numString = count;
+	sent = malloc(sizeof(char*) * (*numString));
+	
+	for(i=0; fgets(buf, MAXIMUM_LENGTH,f)!= NULL; i = i +1)
+	{
+	 sent[i] = malloc(sizeof(char) * (strlen(buf) + 1));
+	 strcpy(sent[i], buf);
+	}
+	fclose(f);
+	}
+	return sent;
+
 }
 
 /* ----------------------------------------------- */
