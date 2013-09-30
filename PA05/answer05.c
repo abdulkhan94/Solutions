@@ -196,6 +196,15 @@ char * * readString(char * filename, int * numString)
  */
 void printInteger(int * arrInteger, int numInteger)
 {
+	int i =0;
+	
+	//Executions
+	while( i < numInteger)
+	{
+	 printf("%d",arrInteger[i]);
+	 printf("\n");
+	 i = i+1;
+	}
 }
 
 /* ----------------------------------------------- */
@@ -206,6 +215,12 @@ void printInteger(int * arrInteger, int numInteger)
  */
 void printString(char * * arrString, int numString)
 {
+	int i = 0;
+	//Executions
+	for(i = 0; i< numString; i = i+1)
+	{
+	 printf("%s", arrString[i]);
+	}
 }
 
 /* ----------------------------------------------- */
@@ -214,6 +229,7 @@ void printString(char * * arrString, int numString)
  */
 void freeInteger(int * arrInteger, int numInteger)
 {
+	free(arrInteger);
 }
 
 /* ----------------------------------------------- */
