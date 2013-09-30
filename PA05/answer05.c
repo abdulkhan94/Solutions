@@ -178,7 +178,7 @@ char * * readString(char * filename, int * numString)
 	
 	*numString = count;
 	sent = malloc(sizeof(char*) * (*numString));
-	
+	fseek(f,0, SEEK_SET);	
 	for(i=0; fgets(buf, MAXIMUM_LENGTH,f)!= NULL; i = i +1)
 	{
 	 sent[i] = malloc(sizeof(char) * (strlen(buf) + 1));
