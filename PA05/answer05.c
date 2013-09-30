@@ -4,7 +4,7 @@
 #include "pa05.h"
 
 int intComp(const void*, const void*);
-//int stringComp(const void*, const void*)
+int stringComp(const void*, const void*);
 /*
  * Read a file of integers.
  *
@@ -272,18 +272,28 @@ void freeString(char * * arrString, int numString)
 
 int saveInteger(char * filename, int * arrInteger, int numInteger)
 {
+
   int i=0;
+
   FILE *f = NULL;
+
   //Executions
+
   f= fopen(filename, "w");
+
   if(f != NULL)
     {
+
       while( i< numInteger)
 	{
+
 	  fprintf(f,"%d\n", arrInteger[i]);
+
 	  i = i+1;
 	}
+
       fclose(f);
+
       return 1;
     }
   return 0;
@@ -311,11 +321,15 @@ int saveString(char * filename, char * * arrString, int numString)
 {
   //Variables
   int i =0;
+
   int length = 0;
+
   FILE *f=NULL;
 
   //Executions
+
   f= fopen(filename, "w");
+
   if( f!= NULL)
     {
       while( i < numString)
@@ -367,9 +381,7 @@ void sortInteger(int * arrInteger, int numInteger)
 
 void sortString(char * * arrString, int numString)
 {
-
-
-
+  qsort(&arrString[0], numString, sizeof(char*), stringComp);
 }
 
 
@@ -377,9 +389,13 @@ int intComp(const void* pointer1, const void* pointer2)
 {
  
   //Variables
+
   int * point1 = (int*)pointer1;
+
   int value1 = * point1;
+
   int * point2 = (int*)pointer2;
+
   int value2 = * point2;
 
   //Executions
@@ -387,9 +403,22 @@ int intComp(const void* pointer1, const void* pointer2)
     {
       return 0;
     }
-  if( value1>value2)
+  if( value1<value2)
     {
-      return 1;
+      return -1;
     }
   return 1;
+}
+
+int stringComp( const void * pointer1, const void *pointer2)
+{
+  char ** point1 = (char**)pointer1;
+
+  char * value1= *point1;
+
+  char ** point2 = (char**)pointer2;
+
+  char * value2= *point2;
+
+  return strcmp(value1,value2);
 }
