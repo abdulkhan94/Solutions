@@ -3,6 +3,8 @@
 #include <string.h>
 #include "pa05.h"
 
+int intComp(const void*, const void*);
+//int stringComp(const void*, const void*)
 /*
  * Read a file of integers.
  *
@@ -338,31 +340,56 @@ int saveString(char * filename, char * * arrString, int numString)
   return 0;
 }
 
-      /* ----------------------------------------------- */
-      /*
-       * sort an arry of integers by calling the built-in qsort function in
-       * the C library.  You need to provide the comparison function. Please
-       * read the Linux manual about qsort
-       *
-       */
+/* ----------------------------------------------- */
+/*
+* sort an arry of integers by calling the built-in qsort function in
+* the C library.  You need to provide the comparison function. Please
+* read the Linux manual about qsort
+*
+*/
 
-      void sortInteger(int * arrInteger, int numInteger)
-      {
-      }
+void sortInteger(int * arrInteger, int numInteger)
+{
+  qsort(&arrInteger[0],numInteger, sizeof(int), intComp);
 
-
-      /* ----------------------------------------------- */
-      /*
-       * sort an arry of strings by calling the built-in qsort function in
-       * the C library.  You need to provide the comparison function. Please
-       * read the Linux manual about qsort
-       *
-       * Hint: use strcmp in the comparison function
-       *
-       */
-
-      void sortString(char * * arrString, int numString)
-      {
-      }
+}
 
 
+/* ----------------------------------------------- */
+     /*
+* sort an arry of strings by calling the built-in qsort function in
+* the C library.  You need to provide the comparison function. Please
+* read the Linux manual about qsort
+*
+* Hint: use strcmp in the comparison function
+*
+*/
+
+void sortString(char * * arrString, int numString)
+{
+
+
+
+}
+
+
+int intComp(const void* pointer1, const void* pointer2)
+{
+ 
+  //Variables
+  int * point1 = (int*)pointer1;
+  int value1 = * point1;
+  int * point2 = (int*)pointer2;
+  int value2 = * point2;
+
+  //Executions
+  if(value1 == value2)
+    {
+      return 0;
+    }
+  if( value1>value2)
+    {
+      return 1;
+    }
+  return 1;
+}
