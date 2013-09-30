@@ -62,34 +62,34 @@
 
 int * readInteger(char * filename, int * numInteger)
 {
-	//Variables
-	FILE *f= NULL;
-	int *arra= NULL;
-	int count=0;
-	int mem=0;
-	int i=0;
+  //Variables
+  FILE *f= NULL;
+  int *arra= NULL;
+  int count=0;
+  int mem=0;
+  int i=0;
 	
-	//Executions
-	f= fopen(filename,"r");
-	if(f != NULL)
+  //Executions
+  f= fopen(filename,"r");
+  if(f != NULL)
+    {
+      while(fscanf(f,"%d",&mem)!= EOF)
 	{
- 	 while(fscanf(f,"%d",&mem)!= EOF)
-	 {
  	  count = count +1;
-	 }
-	*numInteger = count;
+	}
+      *numInteger = count;
 
-	arra = malloc(sizeof(int)*(*numInteger));
+      arra = malloc(sizeof(int)*(*numInteger));
 
-	fseek(f,0,SEEK_SET);
-	while( i < *numInteger )
+      fseek(f,0,SEEK_SET);
+      while( i < *numInteger )
 	{
-	 fscanf(f,"%d",&arra[i]);
-	 i = i+1;
+	  fscanf(f,"%d",&arra[i]);
+	  i = i+1;
 	}
-	fclose(f);
-	}
-	return arra;
+      fclose(f);
+    }
+  return arra;
 }
 
 /* ----------------------------------------------- */
@@ -160,33 +160,33 @@ int * readInteger(char * filename, int * numInteger)
 
 char * * readString(char * filename, int * numString)
 {
-	FILE *f= NULL;
-	char buf[MAXIMUM_LENGTH];
-	char **sent= NULL;
-	int i=0;
-	int count=0;
+  FILE *f= NULL;
+  char buf[MAXIMUM_LENGTH];
+  char **sent= NULL;
+  int i=0;
+  int count=0;
 
-	//Executions
-	f= fopen(filename,"r");
+  //Executions
+  f= fopen(filename,"r");
 	
-	if(f != NULL)
+  if(f != NULL)
+    {
+      while(fgets(buf, MAXIMUM_LENGTH, f) != NULL)
 	{
- 	 while(fgets(buf, MAXIMUM_LENGTH, f) != NULL)
-	 {
 	  count = count+1;
-	 }
+	}
 	
-	*numString = count;
-	sent = malloc(sizeof(char*) * (*numString));
-	fseek(f,0, SEEK_SET);	
-	for(i=0; fgets(buf, MAXIMUM_LENGTH,f)!= NULL; i = i +1)
+      *numString = count;
+      sent = malloc(sizeof(char*) * (*numString));
+      fseek(f,0, SEEK_SET);	
+      for(i=0; fgets(buf, MAXIMUM_LENGTH,f)!= NULL; i = i +1)
 	{
-	 sent[i] = malloc(sizeof(char) * (strlen(buf) + 1));
-	 strcpy(sent[i], buf);
+	  sent[i] = malloc(sizeof(char) * (strlen(buf) + 1));
+	  strcpy(sent[i], buf);
 	}
-	fclose(f);
-	}
-	return sent;
+      fclose(f);
+    }
+  return sent;
 
 }
 
@@ -196,15 +196,15 @@ char * * readString(char * filename, int * numString)
  */
 void printInteger(int * arrInteger, int numInteger)
 {
-	int i =0;
+  int i =0;
 	
-	//Executions
-	while( i < numInteger)
-	{
-	 printf("%d",arrInteger[i]);
-	 printf("\n");
-	 i = i+1;
-	}
+  //Executions
+  while( i < numInteger)
+    {
+      printf("%d",arrInteger[i]);
+      printf("\n");
+      i = i+1;
+    }
 }
 
 /* ----------------------------------------------- */
@@ -215,12 +215,12 @@ void printInteger(int * arrInteger, int numInteger)
  */
 void printString(char * * arrString, int numString)
 {
-	int i = 0;
-	//Executions
-	for(i = 0; i< numString; i = i+1)
-	{
-	 printf("%s", arrString[i]);
-	}
+  int i = 0;
+  //Executions
+  for(i = 0; i< numString; i = i+1)
+    {
+      printf("%s", arrString[i]);
+    }
 }
 
 /* ----------------------------------------------- */
@@ -229,7 +229,7 @@ void printString(char * * arrString, int numString)
  */
 void freeInteger(int * arrInteger, int numInteger)
 {
-	free(arrInteger);
+  free(arrInteger);
 }
 
 /* ----------------------------------------------- */
@@ -240,13 +240,13 @@ void freeInteger(int * arrInteger, int numInteger)
  */
 void freeString(char * * arrString, int numString)
 {
-	int i =0;
-	//Executions
-	for(i=0; i <numString; i = i+1)
-	{
-	 free(arrString[i]);
-	}
-	free(arrString);
+  int i =0;
+  //Executions
+  for(i=0; i <numString; i = i+1)
+    {
+      free(arrString[i]);
+    }
+  free(arrString);
 
 }
 
@@ -270,21 +270,21 @@ void freeString(char * * arrString, int numString)
 
 int saveInteger(char * filename, int * arrInteger, int numInteger)
 {
-	int i=0;
-	FILE *f = NULL;
-	//Executions
-	f= fopen(filename, "w");
-	if(f != NULL)
+  int i=0;
+  FILE *f = NULL;
+  //Executions
+  f= fopen(filename, "w");
+  if(f != NULL)
+    {
+      while( i< numInteger)
 	{
- 	 while( i< numInteger)
-	 {
 	  fprintf(f,"%d\n", arrInteger[i]);
 	  i = i+1;
-	 }
-	fclose(f);
-	return 1;
 	}
-	return 0;
+      fclose(f);
+      return 1;
+    }
+  return 0;
 }
 
 /* ----------------------------------------------- */
@@ -319,35 +319,50 @@ int saveString(char * filename, char * * arrString, int numString)
       while( i < numString)
 	{
 	  fprintf(f,"%s", arrString[i]);
-  
+
+	  length = strlen(arrString[i]);
+
+
+	  if(length == 0 || arrString[i][length-1] != '\n')
+	    {
+
+	      fprintf(f,"%s","\n");
+	    }
+
+	  i = i+1;
+	}
+      fclose(f);
+      return 1;
+
+    }
   return 0;
 }
 
-/* ----------------------------------------------- */
-/*
- * sort an arry of integers by calling the built-in qsort function in
- * the C library.  You need to provide the comparison function. Please
- * read the Linux manual about qsort
- *
- */
+      /* ----------------------------------------------- */
+      /*
+       * sort an arry of integers by calling the built-in qsort function in
+       * the C library.  You need to provide the comparison function. Please
+       * read the Linux manual about qsort
+       *
+       */
 
-void sortInteger(int * arrInteger, int numInteger)
-{
-}
+      void sortInteger(int * arrInteger, int numInteger)
+      {
+      }
 
 
-/* ----------------------------------------------- */
-/*
- * sort an arry of strings by calling the built-in qsort function in
- * the C library.  You need to provide the comparison function. Please
- * read the Linux manual about qsort
- *
- * Hint: use strcmp in the comparison function
- *
- */
+      /* ----------------------------------------------- */
+      /*
+       * sort an arry of strings by calling the built-in qsort function in
+       * the C library.  You need to provide the comparison function. Please
+       * read the Linux manual about qsort
+       *
+       * Hint: use strcmp in the comparison function
+       *
+       */
 
-void sortString(char * * arrString, int numString)
-{
-}
+      void sortString(char * * arrString, int numString)
+      {
+      }
 
 
