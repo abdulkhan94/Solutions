@@ -240,6 +240,13 @@ void freeInteger(int * arrInteger, int numInteger)
  */
 void freeString(char * * arrString, int numString)
 {
+	int i =0;
+	//Executions
+	for(i=0; i <numString; i = i+1)
+	{
+	 free(arrString[i]);
+	}
+
 }
 
 /* ----------------------------------------------- */
