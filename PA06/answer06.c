@@ -197,7 +197,7 @@ struct Image * loadImage(const char* filename)
 	  return NULL;
 	}
 
-      if(val != NULL)
+      if(val != 1)
 	{
 	  fclose(file1);
 	  return NULL;
@@ -209,11 +209,48 @@ struct Image * loadImage(const char* filename)
 	  return NULL;
 	}
       
-    }
+      if(!(head1.width)>0)
+	{
+	  fclose(file1);
+	  return NULL;
+	}
+      
+      if(head1.magic_bits != ECE264_IMAGE_MAGIC_BITS)
+	{
+	  fclose(file1);
+	  a= a+1;
+	  return NULL;
+	}
 
+      image1 -> height = head1.height;
+      image1 -> width = head1.width;
+      image1 -> data = malloc(sizeof(unit8_t)*(head1.height)*(head1.width));
+      image1 -> comment = malloc( head1.comment_len *sizeof(char));
+      
+      val = fread(image1 -> comment , sizeof(char), head1.comment_len, file1);
 
-    return NULL;
-}
+      if(val != (head1.height * head1.width))
+	{
+	  freeImage(image1);
+	  fclose(file1);
+	  return NULL
+	 }
+      val = fread(i1 -> comment, sizeof(char),head1.height * head1.width,file1);
+      
+      if(val != (head1.height * head1.width))
+	{
+	  return NULL;
+	}
+      unit_8 check;
+
+      if(fread( &check, sizeof(unit8_t) , 1, fiel1)
+	{
+	  freeImage(image1);
+	  fclose(file1);
+	  return NULL;
+	}
+     }
+}	
 
 
 /*
@@ -228,7 +265,18 @@ struct Image * loadImage(const char* filename)
  */
 void freeImage(struct Image * image)
 {
+  int a =0;
+  if(image == NULL)
+    {
+      a= a+1;
+    }
 
+  if(image! NULL)
+    {
+      free(image -> comment);
+      free(image -> data);
+    }
+  free(image);
 }
 
 /*
@@ -257,6 +305,9 @@ void freeImage(struct Image * image)
  */
 void linearNormalization(struct Image * image)
 {
+
+
+
 
 }
 
