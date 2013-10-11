@@ -306,19 +306,31 @@ void freeImage(struct Image * image)
 void linearNormalization(struct Image * image)
 {
   int count=0;
-  
-  int minimum = image -> data[count];
-  int maximum = iamge -> data[count];
+  int i =0;
+  int smaller = image -> data[count];
+  int larger = iamge -> data[count];
 
   while(count < (image.height)*(image.width))
     {
-      if( minimum > image -> data[count])
+      if( smaller > image -> data[count])
 	{
-	  minimum = image -> data[count];
+	  smaller = image -> data[count];
 	}
-
+      if( larger < image -> data[count])
+	{
+	  larger= image -> data[count]
+        }
       count = count +1;
     }
+  
+  while(i < (image.height)*(image.width))
+    {
+      image -> data[i] = (image -> data[i] - smaller) * 255.0 / (larger- smaller);
+    }
+}
+  
+
+
 
 
 
