@@ -114,9 +114,10 @@ Node * List_build(int * value, int * index, int length)
       if(value[i] != 0)
 	{
 	  test= test+1;
+	  header = List_insert_ascend(header, value[i], i[i]);
 	}
     }
-   return head;
+   return header;
 }
 
 
@@ -141,6 +142,25 @@ Node * List_build(int * value, int * index, int length)
  */
 Node * List_insert_ascend(Node * head, int value, int index)
 {
+  //Executions
+
+  if((head->index)==index)
+    {
+      return head;
+    }
+  
+  if((head->index)>index)
+    {
+      Node*lis= List_create(value,index);
+      lis-> next=head;
+      return lis;
+    }
+
+  if(head == NULL)
+    {
+      return List_create(value,index);
+    }
+  
     return NULL;
 }
 
