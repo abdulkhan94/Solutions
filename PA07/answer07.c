@@ -114,7 +114,7 @@ Node * List_build(int * value, int * index, int length)
       if(value[i] != 0)
 	{
 	  test= test+1;
-	  header = List_insert_ascend(header, value[i], i[i]);
+	  header = List_insert_ascend(header, value[i], index[i]);
 	}
     }
    return header;
@@ -161,7 +161,10 @@ Node * List_insert_ascend(Node * head, int value, int index)
       return List_create(value,index);
     }
   
-    return NULL;
+  head->next= List_insert_ascend(head->next,value,index);
+
+  
+  return head;
 }
 
 
@@ -177,7 +180,20 @@ Node * List_insert_ascend(Node * head, int value, int index)
  */
 Node * List_delete(Node * head, int index)
 {
-    return NULL;
+  //Executions
+  if(head->index==index)
+    {
+      Node*lis= NULL;
+      
+      lis= head->next;
+      
+    
+      
+      return lis;
+    }
+  head->next= List_delete(head->next,index);
+
+  return NULL;
 }
 
 /**
