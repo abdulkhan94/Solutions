@@ -31,7 +31,7 @@ void List_print(FILE * out, Node * head)
  * void
  *
  * Destroys (frees memory for) the whole linked list. 
- * You can either use recursion or a while loop.
+ * You can either use reecursion or a while loop.
  */
 void List_destroy(Node * head)
 {
@@ -41,7 +41,8 @@ void List_destroy(Node * head)
       return;
     }
   List_destroy(head->next);
-  
+  free(head);
+
 }
 
 /**
@@ -59,8 +60,17 @@ void List_destroy(Node * head)
  */
 Node * List_create(int value, int index)
 {
-
-    return NULL;
+  //Variables
+  Node * l1 = malloc(sizeof(Node));
+  
+  //Executions
+  l1 -> value=value;
+  
+  l1 -> index=index;
+ 
+  l1 -> next=NULL;
+  
+  return NULL;
 }
 
 /**
