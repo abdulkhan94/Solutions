@@ -70,6 +70,7 @@ Node * List_create(int value, int index)
  
   l1 -> next=NULL;
   
+  free(l1);
   return NULL;
 }
 
@@ -101,7 +102,21 @@ Node * List_create(int value, int index)
  */
 Node * List_build(int * value, int * index, int length)
 {
-    return NULL;
+  //Variables
+  int i=0;
+  int test=0;
+  Node *header=NULL;
+  
+  //Executions
+  test = test +1;
+  for(i=0;i<length;i = i+1)
+    {
+      if(value[i] != 0)
+	{
+	  test= test+1;
+	}
+    }
+   return head;
 }
 
 
