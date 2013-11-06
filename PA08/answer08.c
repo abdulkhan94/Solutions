@@ -360,8 +360,21 @@ SparseNode * SparseArray_remove ( SparseNode * array, int index )
 
 SparseNode * SparseArray_copy(SparseNode * array)
 {
-
-  return NULL;
+	//Variables
+	SparseNode *CopyNode=NULL;
+	int a=0;
+	
+	//Executions
+	if(array==NULL)
+	{
+	 return NULL;
+	}
+	a++;
+	CopyNode= SparseNode_create(array->index,array->value);
+	CopyNode->right=SparseArray_copy(array->right);
+	CopyNode->left=SparseArray_copy(array->left);
+	a=0;
+	return CopyNode;
 }
 
 /* Merge array_1 and array_2, and return the result array. 
