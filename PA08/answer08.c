@@ -222,8 +222,30 @@ int SparseArray_getMax ( SparseNode * array )
  */
 SparseNode * SparseArray_getNode(SparseNode * array, int index )
 {
+	//Variables
+	int a =0;
+	
+	//Executions
+	a++;
+	if(array==NULL)
+	{
+	 a++;
+	 return NULL;
+	}
 
-  return NULL;
+	if(array->index>index)
+	{
+	 return SparseArray_getNode(array->left,index);
+	}
+		
+	if(array->index==index)
+	{
+	 return array;
+	}
+
+	return SparseArray_getNode(array->right,index);
+	
+
 }
 
 /* Remove a value associated with a particular index from the sparse
@@ -255,7 +277,73 @@ SparseNode * SparseArray_getNode(SparseNode * array, int index )
 */
 SparseNode * SparseArray_remove ( SparseNode * array, int index )
 {
-  return array ;
+	//Variables
+	int i=0;
+	int temp;
+	int s=0;
+
+	//Executions
+	if(array==NULL)
+	{
+	 return NULL;
+	}
+	
+	if(array->index > index)
+	{
+	 array->left = SparseArray_remove(array->left,index);
+	 return array;
+	}
+
+	if(array->index <index)
+	{
+	 array->right= SparseArray_remove(array->right,index);
+	 return array;
+	}
+	
+	if((array->left==NULL)&&(array->right==NULL))
+	{
+	 i=i+1;
+	 s=s+1;
+	 free(array);
+	 return NULL;
+	}
+	
+	if(array->right==NULL)
+	{
+	 SparseNode *lefty= array->left;
+	 free(array);
+	 return lefty;
+	}
+	
+	if(array->left==NULL)
+	{
+	 SparseNode *righty= array->right;
+	 free(array);
+	 return righty;
+	}
+	SparseNode *su= array->right;
+	
+	while(su->left!=NULL)
+	{
+	 su=su->left;
+	 i++;
+	 s++;
+	}
+	
+	temp=array->value;
+	i=0;
+	array->value=su->value;
+
+	array->index=su->index;
+	s=0;
+	su->index=index;
+
+	su->value=temp;	
+
+	array->right=SparseArray_remove(array->right,index);
+	return array;
+
+	
 }
 
 /* The function makes a copy of the input sparse array tree
