@@ -109,7 +109,25 @@ SparseNode * SparseArray_insert ( SparseNode * array, int index, int value )
 
 SparseNode *SparseArray_build(int * indicies, int * values, int length)
 {
-  return NULL;
+	//Variables
+	int i =0;
+	int a=0;
+	SparseNode *nt=NULL;
+	
+	//Executions
+	if(length==0)
+	{
+	 return nt;
+	}
+	
+	for(a=0; a<length; a=a+1)
+	{
+	 i=i+1;
+	 nt=SparseArray_insert(nt,indicies[a],values[a]);
+	}
+	
+
+	return nt;
 }
 
 /* Destroy an entire sparse array tree. 
