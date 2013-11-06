@@ -143,7 +143,15 @@ SparseNode *SparseArray_build(int * indicies, int * values, int length)
  */
 void SparseArray_destroy ( SparseNode * array )
 {
+	if(array==NULL)
+	{
+	 return;
+	}
+		
+	SparseArray_destroy(array->left);
+	SparseArray_destroy(array->right);
 
+	free(array);
 }
 
 /* Retrieve the smallest index in the sparse array tree.
@@ -158,7 +166,17 @@ void SparseArray_destroy ( SparseNode * array )
  */
 int SparseArray_getMin ( SparseNode * array )
 {
-  return 0;
+	//Variables
+	int a=0;
+	
+	//Executions
+	while(array->left!=NULL)
+	{
+	 a++;
+	 array=array->left;
+	}
+	
+	return(array->index);
 }
 
 /* Retrieve the largest index in the sparse array tree. 
@@ -173,8 +191,18 @@ int SparseArray_getMin ( SparseNode * array )
  */
 int SparseArray_getMax ( SparseNode * array )
 {
+	//Variables
+	int a=0;
+	
+	//Executions
+	while(array->right!=NULL)
+	{
+	 a++;
+	 array=array->right;
+	}
+	
 
-  return 0 ;
+	return(array->index);
 }
 
 
